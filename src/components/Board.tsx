@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
-import List from "./list/List";
-import AddList from "./list/AddList";
 import { moveCard } from "../redux/actions";
 import { Button, makeStyles, Grid } from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
+import List from "./list/List";
+import AddList from "./list/AddList";
 import { AppState } from "../typedef";
 
 const useStyles = makeStyles((theme) => ({

@@ -51,16 +51,14 @@ const Card: FC<Props> = ({ listId, cardId, index }) => {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  const diffDays = (date: string | null | undefined, otherDate: Date) => {
+  const diffDays = (date: string | null | undefined) => {
     //@ts-ignore
-    return Math.ceil((new Date(date) - otherDate) / (1000 * 60 * 60 * 24));
+    return Math.ceil((new Date(date) - new Date()) / (1000 * 60 * 60 * 24));
   };
 
-  const yellow =
-    diffDays(card.date, new Date()) === 1 ? classes.cardYellow : "";
-  const orange =
-    diffDays(card.date, new Date()) === 0 ? classes.cardOrange : "";
-  const red = diffDays(card.date, new Date()) === -1 ? classes.cardRed : "";
+  const yellow = diffDays(card.date) === 1 ? classes.cardYellow : "";
+  const orange = diffDays(card.date) === 0 ? classes.cardOrange : "";
+  const red = diffDays(card.date) <= -1 ? classes.cardRed : "";
 
   return (
     <>

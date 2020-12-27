@@ -2,13 +2,7 @@ import React, { FC, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { changeCardTitle, delCard } from "../../redux/actions";
 import DateFnsUtils from "@date-io/date-fns";
-import {
-  makeStyles,
-  Button,
-  Modal,
-  TextField,
-  Grid,
-} from "@material-ui/core";
+import { makeStyles, Button, Modal, TextField, Grid } from "@material-ui/core";
 import {
   MuiPickersUtilsProvider,
   KeyboardDatePicker,
@@ -23,6 +17,7 @@ const useStyles = makeStyles((theme) => ({
     width: "50%",
     backgroundColor: "#fff",
     borderRadius: "5px",
+    outline: "none",
   },
   modal: {
     display: "flex",
@@ -46,8 +41,6 @@ const EditCard: FC<Props> = ({ listId, open, handleClose, cardId }) => {
   const dispatch = useDispatch();
   const card = useSelector((state: AppState) => state.cardsByIdReducer[cardId]);
 
-
-
   const [cardTitle, setCardTitle] = useState(card.text || "");
   const handleChangeCardTitle = (e: React.ChangeEvent<HTMLInputElement>) =>
     setCardTitle(e.target.value);
@@ -55,8 +48,8 @@ const EditCard: FC<Props> = ({ listId, open, handleClose, cardId }) => {
   const handleChangeCardDescription = (
     e: React.ChangeEvent<HTMLInputElement>
   ) => setCardDescription(e.target.value);
-  const [cardDate, setCardDate] = useState<Date | null>(new Date("2020-12-27"));
-  const handleChangeCardDate = (date: Date | null ) => setCardDate(date);
+  const [cardDate, setCardDate] = useState<Date | null>(new Date());
+  const handleChangeCardDate = (date: Date | null) => setCardDate(date);
 
   const editCard = () => {
     handleClose();
@@ -70,8 +63,6 @@ const EditCard: FC<Props> = ({ listId, open, handleClose, cardId }) => {
     );
   };
   const deleteCard = () => dispatch(delCard({ cardId: card._id, listId }));
-
-
 
   return (
     <Modal className={classes.modal} open={open} onClose={handleClose}>
